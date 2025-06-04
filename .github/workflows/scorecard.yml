@@ -58,8 +58,8 @@ jobs:
       # Upload the results as artifacts (optional). Commenting out will disable uploads of run results in SARIF
       # format to the repository Actions tab.
       - name: "Upload artifact"
-        # Reverting to @v3 tag for actions/upload-artifact. The SHA caused an authentication error.
-        uses: actions/upload-artifact@v3
+        # Trying a specific SHA for actions/upload-artifact@v3.0.0
+        uses: actions/upload-artifact@f475f483c667680385966342a2757271758ce713 # v3.0.0 SHA
         with:
           name: scorecard-report
           path: results.sarif
