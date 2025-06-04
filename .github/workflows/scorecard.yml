@@ -25,7 +25,7 @@ jobs:
       # Needed to publish results and get a badge (see publish_results below).
       id-token: write
       # REQUIRED for actions/upload-artifact to work correctly.
-      contents: write # <--- This permission was added/confirmed for artifact upload
+      contents: write
       # Uncomment the permissions below if installing in a private repository.
       # actions: read
 
@@ -58,17 +58,14 @@ jobs:
       # Upload the results as artifacts (optional). Commenting out will disable uploads of run results in SARIF
       # format to the repository Actions tab.
       - name: "Upload artifact"
-        # Using major version tag for better maintainability (generally safe for core actions)
-        uses: actions/upload-artifact@v3
+        # Using a specific SHA for actions/upload-artifact@v3 to bypass download issues
+        uses: actions/upload-artifact@97a0fba1372883ab88eb53be808477a3936bae11 # v3.2.0 SHA
         with:
-          name: scorecard-report # Confirmed this is a valid artifact name
+          name: scorecard-report
           path: results.sarif
           retention-days: 5
 
       # Upload the results to GitHub's code scanning dashboard (optional).
       # Commenting out will disable upload of results to your repo's Code Scanning dashboard
       - name: "Upload to code-scanning"
-        # Using major version tag for better maintainability (generally safe for core actions)
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: results.sarif
+        # Using major version tag for better
